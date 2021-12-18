@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doučovna</title>
+    <link rel="icon" href="logo.png" type="image/icon type">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="styleTutors.css">
+</head>
+<body>
+<header>
+    <nav>
+        <img src="logo.png" alt="logo">
+        <h1>Doučovna</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tutors.html">Tutors</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>All tutors</h1>
+    <input type="text" placeholder="Search for specific tutor.." class="filterBar">
+    <div class="filterButton">
+        {{range .Subjects}}
+        <input type="button" id="{{.Id}}" value="{{.Name}}" onclick="enableFilter('{{.Name}}')">
+        {{end}}
+        <input type="button" value="Disable All" onclick="enableFilter('tutor')">
+    </div>
+    <div>
+        {{range .Tutors}}
+            <div class="{{.Subject}} tutor">
+                <a href="tutors/{{.TutorId}}" class="pfp"><img class="pfp" src="{{.ProfilePicture}}" alt="Profile Picture"/></a>
+                <h1>{{.Name}}</h1>
+                <p>{{.Subject}}</p>
+                <p>{{.Description}}</p>
+            </div>
+        {{end}}
+    </div>
+</main>
+
+<script>
+    function enableFilter(name) {
+        console.log(name)
+        let divs = document.getElementsByClassName("tutor");
+
+        for (let i = 0; i < divs.length; i++) {
+            console.log(divs[i].classList)
+            if (divs[i].classList.contains(name)) {
+                divs[i].style.display = "flex"
+            } else {
+                divs[i].style.display = "none"
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
